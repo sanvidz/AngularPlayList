@@ -1,0 +1,28 @@
+<div>
+  <div>
+    <iframe width="100%" height="300" [src]="video.url | safeUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <form>
+    <div *ngIf="editTitle" class="form-group">
+      <input type="input" class="form-control" name="title" required placeholder="Title" [(ngModel)]="video.title">
+    </div>
+    <h3 id="titleHeading" *ngIf="!editTitle" (click)="onTitleClick()">{{video.title}}</h3>
+    <div class="form-group">
+      <input type="input" class="form-control" name="url" required placeholder="Url" [(ngModel)]="video.url">
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" rows="5" name="desc" [(ngModel)]="video.description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" style="width:90px" (click)="updateVideo()">
+      Update
+    </button>
+    <span *ngIf="confirmDelete">
+      <span>Are you sure you want to delete ?</span>
+      <button type="submit" class="btn btn-danger" style="width:70px" (click)="deleteVideo()">Yes</button>
+      <button class="btn btn-primary" style="width:70px" (click)="confirmDelete=false">No</button>
+    </span>
+    <button *ngIf="!confirmDelete" class="btn btn-danger" style="width:90px" (click)="confirmDelete=true">Delete</button>
+  </form>
+</div>
